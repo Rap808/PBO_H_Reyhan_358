@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 public class Main {
-    static String admin = "Admin358";
-    static String Password = "Password358";
-    static String nama = "REYHAN ADITYA PRASTYO";
-    static String NIM = "202410370110358";
+    static final String admin = "Admin358";
+    static final String Password = "Password358";
+    static final String nama = "REYHAN ADITYA PRASTYO";
+    static final String NIM = "202410370110358";
 
     static int login(){
         Scanner input = new Scanner(System.in);
