@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Main {
+    Login Mahasiswa = new Login();
+    Login admin = new Login();
+
     static final String admin = "Admin358";
     static final String Password = "Password358";
     static final String nama = "REYHAN ADITYA PRASTYO";
