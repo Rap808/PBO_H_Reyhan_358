@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class LoginSystem {
     static User user = new User("202410370110358","REYHAN ADITYA PRASTYO");
     static Mahasiswa mahasiswa = new Mahasiswa("202410370110358","REYHAN ADITYA PRASTYO");
-    static Admin admin = new Admin("202410370110358","REYHAN ADITYA PRASTYO");
+    static Admin admin = new Admin("202410370110358","REYHAN ADITYA PRASTYO","Malang");
 
     static int login(){
         Scanner input = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class LoginSystem {
 
             login = admin.Login(Username, password);
             if (login) {
-                System.out.println("Login admin Berhasil");
+                System.out.println("Login admin Berhasil\n");
                 admin.DisplayInfo();
             } else {
                 System.out.println("Login gagal! Username atau Password salah.");

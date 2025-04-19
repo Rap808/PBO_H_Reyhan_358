@@ -1,5 +1,11 @@
 import java.util.Scanner;
+
 public class Main {
+    static void pilih_character(){
+        int pilihan;
+
+
+    }
     public static void main(String[] args) {
         //Objek beserta parameter
         KarakterGame KarakterUmum = new KarakterGame("Mebius",100);
@@ -7,6 +13,7 @@ public class Main {
         Musuh musuh = new Musuh("Thor",200);
 
         System.out.println("GAme Start");
+        System.out.println("Choose your Character :");
         System.out.println("Status awal :");
         System.out.printf("%s Memiliki Kesehatan %d\n",pahlawan.getNama(),pahlawan.getKesehatan());
         System.out.printf("%s Memiliki Kesehatan %d\n",musuh.getNama(),musuh.getKesehatan());
