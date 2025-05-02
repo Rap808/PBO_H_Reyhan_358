@@ -1,5 +1,6 @@
 class Admin extends User {
-    private String alamat;
+    private final String alamat;
+
     Admin(String Nim,String Nama,String alamat){
         super(Nim,Nama);
         this.alamat = alamat;
@@ -7,8 +8,8 @@ class Admin extends User {
     @Override
     boolean Login(String Username,String password) {
 
-        String admin = "admin358";
-        String password1 = "password358";
+        final String admin = "admin358";
+        final String password1 = "password358";
         return Username.equals(admin) && password.equals(password1);
     }
 
