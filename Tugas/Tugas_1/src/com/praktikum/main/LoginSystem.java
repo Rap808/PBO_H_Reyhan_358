@@ -1,76 +1,71 @@
+package com.praktikum.main;
+
+import com.praktikum.data.Item;
+import com.praktikum.error.loginExeptions;
+import com.praktikum.users.Admin;
+import com.praktikum.users.Mahasiswa;
+import com.praktikum.users.User;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LoginSystem {
-    static User user = new User("202410370110358","REYHAN ADITYA PRASTYO");
-    static Mahasiswa mahasiswa = new Mahasiswa("202410370110358","REYHAN ADITYA PRASTYO");
-    static Admin admin = new Admin("202410370110358","REYHAN ADITYA PRASTYO","Malang");
-
-    static int login(){
-        Scanner input = new Scanner(System.in);
-        user.First();
-        System.out.println("1. Admin ");
-        System.out.println("2. Mahasiswa");
-        System.out.println("3. Keluar");
-        System.out.print("Masukkan Pilihan :");
-        int pilihan = input.nextInt();
-        return pilihan;
-    }
-
-    static void Login_Admin(){
-        Scanner input = new Scanner(System.in);
-        boolean login;
-        do {
-            System.out.print("Masukkan Username :");
-            String Username = input.nextLine();
-            System.out.print("Masukkan Password :");
-            String password = input.nextLine();
-
-            login = admin.Login(Username, password);
-            if (login) {
-                System.out.println("Login admin Berhasil\n");
-                admin.DisplayInfo();
-            } else {
-                System.out.println("Login gagal! Username atau Password salah.");
-            }
-        }while (!login);
-    }
-    static void Login_Mahasiswa(){
-        Scanner input = new Scanner(System.in);
-        boolean login;
-        do {
-            System.out.print("Masukkan Nama :");
-            String Nama = input.nextLine().toUpperCase();
-            System.out.print("Masukkan NIM :");
-            String Nim = input.nextLine();
-
-            login = mahasiswa.Login(Nama,Nim);
-            if (login) {
-                System.out.println("Login Mahasiswa Berhasil\n");
-                mahasiswa.DisplayInfo();
-            } else {
-                System.out.println("Login gagal! Nama atau NIM salah.");
-            }
-        }while (!login);
-    }
+    static public ArrayList<User> userList = new ArrayList<>();
+    static public ArrayList<Item> reportedItem = new ArrayList<>();
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Program Login :");
-        int pilihan;
+        userList.add(new Admin("password358", "Admin358"));
+        userList.add(new Mahasiswa("202410370110358", "Reyhan Aditya Prastyo"));
+
+        Scanner scanner = new Scanner(System.in);
+        boolean pilih = false;
+        System.out.println("\n=== Sistem Login ===");
         do {
-            pilihan = login();
-            if (pilihan == 1) {
-                Login_Admin();
-            } else if (pilihan == 2) {
-                Login_Mahasiswa();
-            } else if (pilihan == 3){
-                System.out.println("Sampai jumpa >_<");
-                break;
-            }else {
-                System.out.println("Pilihan Tidak Valid");
+            User loggedInUser = null;
+            while (loggedInUser == null) {
+                System.out.print("Masukkan username/nama: ");
+                String username = scanner.nextLine();
+                System.out.print("Masukkan password/NIM: ");
+                String password = scanner.nextLine();
+
+                try {
+                    loggedInUser = doLogin(username, password);
+
+                    if (loggedInUser == null) {
+                        throw new loginExeptions("\nUser not found!");
+                    }
+
+                    System.out.println("Login berhasil!");
+                    loggedInUser.DisplayInfo(username, password);
+                    loggedInUser.DisplayAppMenu();
+                } catch (loginExeptions e) {
+                    System.out.println("ERROR: " + e.getMessage());
+                    System.out.println("Silahkan coba lagi.\n");
+                }
             }
-        }while(pilihan != 1 && pilihan != 2);
-        user.Last();
-        input.close();
+            System.out.print("Apakah Ingin Melanjutkan 1(Yes)/0(No):");
+            int lanjut = scanner.nextInt();
+            if (lanjut == 0){pilih = true;}
+            scanner.nextLine();
+
+        }while (!pilih);
+
+        scanner.close();
+        System.out.println("\n\n===== Code Execution Successful =====");
+    }
+
+    public static User doLogin(String userInput, String passInput) {
+        for (User u : userList) {
+            if (u instanceof Admin admin) {
+                if (admin.getNama().equals(userInput) && admin.getNim().equals(passInput)) {
+                    return admin;
+                }
+            } else if (u instanceof Mahasiswa mhs) {
+                if (mhs.getNama().equals(userInput) && mhs.getNim().equals(passInput)) {
+                    return mhs;
+                }
+            }
+        }
+        return null;
     }
 }

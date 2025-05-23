@@ -1,4 +1,6 @@
 package com.praktikum.actions;
 
-public interface Component {
+public interface MahasiswaAction {
+    void reportItem();
+    void ViewReportedItem();
 }

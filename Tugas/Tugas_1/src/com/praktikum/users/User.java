@@ -1,4 +1,6 @@
-public class User {
+package com.praktikum.users;
+
+public abstract class User {
     private String Nim ;
     private String Nama;
 
@@ -7,17 +9,12 @@ public class User {
         this.Nama = Nama;
     }
     void setNim(String nim){this.Nim = nim;}
-    String getNim(){return Nim;}
+    public String getNim(){return Nim;}
     void setNama(String nama){this.Nama = nama;}
-    String getNama(){return Nama;}
+    public String getNama(){return Nama;}
 
-    void First(){
-        System.out.println("Selamat Datang >_<");
-    }
-    void Last(){
-        System.out.println("\n\n===== Execution Successful =====");
-    }
-    boolean Login(String Username, String password){return true;}
-    void DisplayInfo(){}
+    //public abstract boolean Login(String Username, String password);
+    public void DisplayInfo(String nama,String nim){}
+    public abstract void DisplayAppMenu();
 }
 
